@@ -4,6 +4,11 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello Develop03 World!");
+        Word word = new Word("hello");
+
+        Scripture scripture = new Scripture();
+
+        scripture.HideWords();
+        scripture.Diaply();
     }
 }
