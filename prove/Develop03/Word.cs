@@ -20,15 +20,18 @@ class Word
    }
    public void Display()
    {
-     if(!_isHidden){
+     if(!_isHidden)
+     {
        Console.Write($" {_text}");
      }
-     else{
-        string hello = "";
-        for (int i = 0; i < _text.Length; i++){
-            hello += "_";
+     else
+     {
+        string wordsinScripture = "";
+        for (int i = 0; i < _text.Length; i++)
+        {
+            wordsinScripture += "_";
         }
-        Console.Write($" {hello}");
+        Console.Write($" {wordsinScripture}");
      }
    }
    public bool IsHidden() // retrun current hidden word
@@ -43,9 +46,6 @@ class Word
    {
       return _isHidden;
    }   
-//    public string GetRenderedText() //
-//    {
-
-//    }
+   
 
 }

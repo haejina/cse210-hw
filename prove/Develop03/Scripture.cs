@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Windows.Input;
 class Scripture
 {
     private string _reference;
@@ -18,14 +19,15 @@ class Scripture
 
         string[] parts1 = randscripture.Split("|"); // split the refrences and the verse
         _reference = parts1[0];
-        string[] parts2 = parts1[1].Split(" ");
+        string[] parts2 = parts1[1].Split(" "); // split the word by space
 
-        foreach(string part in parts2){
+        foreach(string part in parts2)
+        {
             scripture.Add(new Word(part));
         }
 
     }
-    public void Diaply()
+    public void Display()
     {
         foreach(Word word in scripture)
         {
@@ -51,19 +53,36 @@ class Scripture
         return _text;
     }
 
-    public void HideWords()
+    public void HideRandomWord() // Hide rnadome words in the scripture
     {
-        foreach (Word word in scripture){
-            word.Hide();
+        List<Word> hidddenWords = new List<Word>();
+
+        foreach(Word word in scripture)
+        {
+            if(!word.IsHidden())
+            {
+               hidddenWords.Add(word);
+            }
+            
         }
+        if (hidddenWords.Count == 0)
+        {
+            return;
+        }
+        int randomIndex = random.Next(hidddenWords.Count);
+        scripture[scripture.IndexOf(hidddenWords[randomIndex])].Hide();
+
+
     }
-    // public string GetRenderedText()
-    // {
-
-    // }
-    // public void HideWords()
-    // {
-
-    // }
-
+    public bool HideAllWords() // Check if the words are all hidden
+    {
+        foreach (Word word in scripture)
+        {
+            if (!word.IsHidden())
+            {
+               return false; // if the word is not hidden completely, it's false
+            }
+        }
+        return true;
+    }
 }
