@@ -1,7 +1,6 @@
-// Reflection Activity
-public class ReflectionActivity
+
+public class ReflectionActivity : Activity
 {
-    private int duration;
     private string[] prompts = {
         "Think of a time when you stood up for someone else.",
         "Think of a time when you did something really difficult.",
@@ -21,41 +20,32 @@ public class ReflectionActivity
         "How can you keep this experience in mind in the future?"
     };
 
-    public ReflectionActivity(int duration)
+    public ReflectionActivity(int duration) : base(duration)
     {
-        this.duration = duration;
     }
 
-    public void Start()
+    public override void Start()
     {
-        Console.WriteLine("Reflection Activity");
+        Console.WriteLine("===Reflection Activity===");
         Console.WriteLine("This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life.");
+        Console.WriteLine(" ");
         Console.WriteLine("Get ready to begin.");
-        Pause(3);
-
+        Pause(3000); 
         Random random = new Random();
-        int promptIndex = random.Next(prompts.Length);
-        Console.WriteLine(prompts[promptIndex]);
-        Pause(3);
 
-        for (int i = 0; i < duration; i++)
+        Console.WriteLine(" ");
+
+        while (true)
         {
-            int questionIndex = random.Next(questions.Length);
-            Console.WriteLine(questions[questionIndex]);
-            Pause(3);
+            int promptIndex = random.Next(prompts.Length);
+            DisplayPrompt(prompts[promptIndex]);
+
+            for (int i = 0; i < duration; i++)
+            {
+                int questionIndex = random.Next(questions.Length);
+                Console.WriteLine(questions[questionIndex]);
+                Pause(3000); 
+            }
         }
-    }
-
-    public void End()
-    {
-        Console.WriteLine($"Well done!,You have completed {duration} seconds of the Reflection Activity.");
-        Pause(5000); // 5000 milliseconds = 5 seconds
-        Console.WriteLine("Press any key to continue...");
-        Console.ReadKey();
-    }
-
-    private void Pause(int milliseconds)
-    {
-        Thread.Sleep(milliseconds);
     }
 }

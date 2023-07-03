@@ -17,21 +17,15 @@ class Program
             switch (choice)
             {
                 case 1:
-                    Console.Write("How long, in seconds, would you like for your session?");
-                    int breathingDuration = Convert.ToInt32(Console.ReadLine());
-                    BreathingActivity breathingActivity = new BreathingActivity(breathingDuration);
+                    BreathingActivity breathingActivity = new BreathingActivity(GetDurationFromUser());
                     RunActivity(breathingActivity);
                     break;
                 case 2:
-                    Console.Write("How long, in seconds, would you like for your session?");
-                    int reflectionDuration = Convert.ToInt32(Console.ReadLine());
-                    ReflectionActivity reflectionActivity = new ReflectionActivity(reflectionDuration);
+                    ReflectionActivity reflectionActivity = new ReflectionActivity(GetDurationFromUser());
                     RunActivity(reflectionActivity);
                     break;
                 case 3:
-                    Console.Write("How long, in seconds, would you like for your session?");
-                    int listingDuration = Convert.ToInt32(Console.ReadLine());
-                    ListingActivity listingActivity = new ListingActivity(listingDuration);
+                    ListingActivity listingActivity = new ListingActivity(GetDurationFromUser());
                     RunActivity(listingActivity);
                     break;
                 case 0:
@@ -44,22 +38,16 @@ class Program
         }
     }
 
-    private static void RunActivity(object activity)
+    private static void RunActivity(Activity activity)
     {
-        if (activity is BreathingActivity breathingActivity)
-        {
-            breathingActivity.Start();
-            breathingActivity.End();
-        }
-        else if (activity is ReflectionActivity reflectionActivity)
-        {
-            reflectionActivity.Start();
-            reflectionActivity.End();
-        }
-        else if (activity is ListingActivity listingActivity)
-        {
-            listingActivity.Start();
-            listingActivity.End();
-        }
+        activity.Start();
+        activity.End();
+    }
+
+    private static int GetDurationFromUser()
+    {
+        Console.Write("How long, in seconds, would you like for your session?");
+        int duration = Convert.ToInt32(Console.ReadLine());
+        return duration;
     }
 }

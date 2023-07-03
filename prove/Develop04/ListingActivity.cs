@@ -1,58 +1,39 @@
-// Listing Activity
-public class ListingActivity
+public class ListingActivity : Activity
 {
-    private int duration;
-    private string[] prompts = {
-        "Who are people that you appreciate?",
-        "What are personal strengths of yours?",
-        "Who are people that you have helped this week?",
-        "When have you felt the Holy Ghost this month?",
-        "Who are some of your personal heroes?"
+    private string[] items = {
+        "Write a to-do list",
+        "List your favorite movies",
+        "Write down your goals",
+        "List things you are grateful for",
+        "Make a list of places to visit",
+        "List your hobbies and interests",
+        "Write down your strengths and weaknesses"
     };
 
-    public ListingActivity(int duration)
+    public ListingActivity(int duration) : base(duration)
     {
-        this.duration = duration;
     }
 
-    public void Start()
+    public override void Start()
     {
-        Console.WriteLine("Listing Activity");
-        Console.WriteLine("This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.");
+        Console.WriteLine("===Listing Activity===");
+        Console.WriteLine("This activity will help you organize your thoughts and ideas by creating various lists.");
+        Console.WriteLine(" ");
         Console.WriteLine("Get ready to begin.");
-        Pause(3);
+        Pause(3000); 
 
         Random random = new Random();
-        int promptIndex = random.Next(prompts.Length);
-        Console.WriteLine(prompts[promptIndex]);
-        Pause(3);
-        Console.WriteLine("Start listing:");
+        Console.WriteLine(" ");
 
-        int count = 0;
-        DateTime startTime = DateTime.Now;
-        TimeSpan timeElapsed;
-
-        do
+        while (true)
         {
-            string item = Console.ReadLine();
-            count++;
-            timeElapsed = DateTime.Now - startTime;
+            int itemIndex = random.Next(items.Length);
+            DisplayPrompt(items[itemIndex]);
+
+            Pause(duration * 1000); 
+
+            Console.WriteLine($"You have completed another {duration} seconds of the Listing Activity.");
+            Pause(5000); 
         }
-        while (timeElapsed.TotalSeconds < duration);
-
-        Console.WriteLine($"Total items listed: {count}");
-    }
-
-    public void End()
-    {
-        Console.WriteLine($"Well done!,You have completed {duration} seconds of the Reflection Activity.");
-        Pause(5000); // 5000 milliseconds = 5 seconds
-        Console.WriteLine("Press any key to continue...");
-        Console.ReadKey();
-    }
-
-    private void Pause(int milliseconds)
-    {
-        Thread.Sleep(milliseconds);
     }
 }
